@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  3x-ui:
+    image: 'ghcr.io/mhsanaei/3x-ui:latest'
+    container_name: 3x-ui
+    restart: unless-stopped
+    environment:
+      - XUI_DB_TYPE=postgres
+      - 'XUI_DB_DSN=${XUI_DB_DSN}'
+    ports:
+      - '2053:2053/tcp'
+      - '2096:2096/tcp'
+      - '8443:8443/tcp'
+      - '8443:8443/udp'
+      - '2083:2083/tcp'
+      - '2083:2083/udp'
+      - '2087:2087/tcp'
+      - '2087:2087/udp'
+      - '36712:36712/tcp'
+      - '36712:36712/udp'
+    volumes:
+      - 'xui_data:/etc/x-ui'
+    networks:
+      - coolify
+volumes:
+  xui_data: null
+networks:
+  coolify:
+    external: true
